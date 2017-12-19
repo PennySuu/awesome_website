@@ -11,15 +11,21 @@
         </div>
       </div>
     </nav>
-    <div class="modal menu" :class="[menuOpen ? 'show' : 'hide']">
+    <div class="modal menu" v-show="menuOpen" :class="{show: menuOpen}">
       <nav class="navigation-overlay ">
         <ul class="menu-items">
-          <li v-on:mouseover="menuHover('home')" class="navigation-overlay-link selected"><a href="#">home</a></li>
-          <li v-on:mouseover="menuHover('us')" class="navigation-overlay-link"><a href="#">about us</a></li>
-          <li v-on:mouseover="menuHover('work')" class="navigation-overlay-link"><a href="#">work</a></li>
-          <li v-on:mouseover="menuHover('blog')" class="navigation-overlay-link"><a href="#">blog</a></li>
-          <li v-on:mouseover="menuHover('join-us')" class="navigation-overlay-link"><a href="#">join us</a></li>
-          <li v-on:mouseover="menuHover('contact-us')" class="navigation-overlay-link"><a href="#">contact us</a></li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('home')" class="navigation-overlay-link selected"><a
+            href="#">home</a></li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('us')" class="navigation-overlay-link"><a href="#">about us</a>
+          </li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('work')" class="navigation-overlay-link"><a
+            href="#">work</a></li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('blog')" class="navigation-overlay-link"><a
+            href="#">blog</a></li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('join-us')" class="navigation-overlay-link"><a
+            href="#">join us</a></li>
+          <li v-on:mouseleave="menuLeave" v-on:mouseover="menuHover('contact-us')" class="navigation-overlay-link"><a
+            href="#">contact us</a></li>
         </ul>
         <div :class="[currentBg === 'home' ? 'hovered': '']"
              class="navigation-overlay-bg navigation-overlay-bg-home"></div>
@@ -58,6 +64,9 @@
       },
       menuHover (currentBg) {
         this.currentBg = currentBg
+      },
+      menuLeave () {
+        this.currentBg = 'home'
       }
     },
     components: {
