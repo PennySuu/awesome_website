@@ -457,9 +457,15 @@ a:hover {
   text-decoration: none;
   outline: none
 }
+
 html {
   box-sizing: border-box
 }
-*,:after,:before {
+
+*, :after, :before {
   box-sizing: inherit
+}
+
+#app {
+  height: 100%;
 }

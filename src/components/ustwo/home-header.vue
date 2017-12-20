@@ -74,6 +74,11 @@
     bottom auto
     right auto
     z-index 1
+    margin: 0
+    display: block
+    box-sizing content-box
+    padding-top: 0
+    padding-bottom: 0
   
   .header-inner
     position fixed
@@ -84,23 +89,6 @@
     right auto
     height: 100%
     width 100%
-  
-  .scroll-wrapper
-    position relative
-    z-index 1
-    display: flex
-    justify-content: center
-    height: 100%
-    & > *
-      flex 1
-      width: 100%
-      max-width 1200px
-      margin 0 auto
-  
-  .scroll-wrapper-inner
-    display: flex
-    justify-content: center
-    height 100%
   
   .header-intro
     width 100vm
