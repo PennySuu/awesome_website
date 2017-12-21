@@ -4,7 +4,7 @@
     <div class="home-message-text">
       <span>We drive positive change for </span>
       <span class="gradient-words gradient-words-hot">people</span>
-      <span>, </span>
+      <span> , </span>
       <span class="gradient-words gradient-words-cold">businesses</span>
       <span> and </span>
       <span class="gradient-words gradient-words-lukewarm">organisations</span>

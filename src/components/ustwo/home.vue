@@ -27,7 +27,8 @@
     z-index 1
     display: flex
     justify-content: center
-    height: 100%
+    height: 855.2px;
+    box-sizing: content-box
     & > *
       flex 1
       width: 100%
