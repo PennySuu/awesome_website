@@ -66,6 +66,9 @@
   }
 </script>
 <style lang="stylus">
+  .scroll-wrapper
+    height: 100%
+  
   .header-wrapper
     height: 100%
     position relative
