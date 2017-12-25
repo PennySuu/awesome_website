@@ -2,7 +2,7 @@
   <div class="home-carousel">
     <div class="home-carousel-items">
       <a href="#" class="home-carousel-item" v-for="(item, index) in list" :key="index"
-         v-on:mouseenter="mouseenter(index, $event)"
+         v-on:mouseenter="mouseenter(index, $event)" v-on:mouseleave="mouseleave(index, $event)"
          :class="[index%2 ? 'odd' : 'even',  (index===even.active || index===odd.active) ? 'active' : '', (index===even.previous || index===odd.previous) ? 'previous' : '']">
         <div class="home-carousel-item-image">
           <div class="home-carousel-visual-content">
@@ -100,8 +100,21 @@
       mouseenter (index, event) {
         this.isHover = true
         if (index % 2) {
-          console.log(event)
+          event.target.classList.add('justBeenHovered')
+          document.querySelector('.even.active').classList.add('otherIsHovered')
         }
+      },
+      mouseleave (index, event) {
+        if (index % 2) {
+          event.target.classList.add('justBeenHovered')
+          document.querySelector('.even.active').classList.add('justBeenHovered')
+          document.querySelector('.even.active').classList.remove('otherIsHovered')
+          document.querySelector('.even.active').addEventListener('transitionend', this.removeClass.bind(this, document.querySelector('.even.active'), 'justBeenHovered'), false)
+          event.target.addEventListener('transitionend', this.removeClass.bind(this, event.target, 'justBeenHovered'), false)
+        }
+      },
+      removeClass (element, className) {
+        element.classList.remove(className)
       }
     },
     mounted () {
@@ -185,11 +198,9 @@
           &::after
             left: 0
         &:hover
-          &::after
-            background linear-gradient(-90deg, transparent, #fff)
-        &.otherIsHovered
           .home-carousel-item-image
-            transform scale(.9)
+            &::after
+              background linear-gradient(-90deg, transparent, #fff)
       &.odd
         padding-right: 100px
         right: 130px
@@ -207,10 +218,26 @@
           z-index 8
           .home-carousel-item-image
             transform scale(1)
+          .home-carousel-item-image,
+          .home-carousel-item-text
+            transition-delay .4s
         &.odd
           z-index 6
           .home-carousel-item-image
-            transform scale(.9)
+            transform scale(.95)
+          .home-carousel-item-image,
+          .home-carousel-item-text
+            transition-delay .2s
+        .home-carousel-item-image,
+        .home-carousel-item-text
+          visibility visible
+        &.otherIsHovered
+          .home-carousel-item-image
+            transform: scale(.95);
+            transition-delay: 0s
+        &.justBeenHovered
+          .home-carousel-item-image
+            transition-delay 0s
         &:hover
           z-index 9
           .home-carousel-item-image
@@ -218,31 +245,17 @@
       &.previous
         &.even
           z-index 7
+          .home-carousel-item-image,
+          .home-carousel-item-text
+            transition-delay .2s
         &.odd
           z-index 4
+          .home-carousel-item-image,
+          .home-carousel-item-text
+            transition-delay 0s
   
   .home-carousel-item:not(.active) {
     z-index: 0
-  }
-  
-  .home-carousel-item.previous.odd .home-carousel-item-image, .home-carousel-item.previous.odd .home-carousel-item-text {
-    transition-delay: 0s
-  }
-  
-  .home-carousel-item.previous.even .home-carousel-item-image, .home-carousel-item.previous.even .home-carousel-item-text {
-    transition-delay: .2s
-  }
-  
-  .home-carousel-item.active.odd .home-carousel-item-image, .home-carousel-item.active.odd .home-carousel-item-text {
-    transition-delay: .2s
-  }
-  
-  .home-carousel-item.active.even .home-carousel-item-image, .home-carousel-item.active.even .home-carousel-item-text {
-    transition-delay: .4s
-  }
-  
-  .home-carousel-item.active .home-carousel-item-image, .home-carousel-item.active .home-carousel-item-text {
-    visibility: visible
   }
   
   .section-title
